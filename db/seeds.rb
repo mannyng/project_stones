@@ -10,32 +10,33 @@ require 'ffaker' #Using faker to seed make-believe data
 require 'csv' #Pull data from local .csv files
 
 # Seed zip_code and states tables via SQL import
-#csv_text = File.read("#{Rails.root}/db/state_table.csv")
-#csv = CSV.parse(csv_text, :headers => true)
-#csv.each do |row|
-# State.create!(row.to_hash)
-#end
+csv_text = File.read("#{Rails.root}/db/state_table.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+ State.create!(row.to_hash)
+end
 
-#csv_text = File.read("#{Rails.root}/db/zip_code_table.csv")
-#csv = CSV.parse(csv_text, :headers => true)
-#csv.each do |row|
-#  ZipCode.create!(row.to_hash)
-#end
+csv_text = File.read("#{Rails.root}/db/zip_code_table.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  ZipCode.create!(row.to_hash)
+end
 
 # Generate transaction types
-#TransactionType.create(id: 1, name: 'ATM_Withdrawal')
-#TransactionType.create(id: 2, name: 'Check')
-#TransactionType.create(id: 3, name: 'Deposit')
-#TransactionType.create(id: 4, name: 'Auto-draft')
-#TransactionType.create(id: 5, name: 'POS')
-#TransactionType.create(id: 6, name: 'Transfer')
-#TransactionType.create(id: 7, name: 'Withdrawal')
-#TransactionType.create(id: 8, name: 'Interest')
-#TransactionType.create(id: 99, name: 'Miscellaneous')
+TransactionType.create(id: 1, name: 'ATM_Withdrawal')
+TransactionType.create(id: 2, name: 'Check')
+TransactionType.create(id: 3, name: 'Deposit')
+TransactionType.create(id: 4, name: 'Auto-draft')
+TransactionType.create(id: 5, name: 'POS')
+TransactionType.create(id: 6, name: 'Transfer')
+TransactionType.create(id: 7, name: 'Withdrawal')
+TransactionType.create(id: 8, name: 'Interest')
+TransactionType.create(id: 8, name: 'Wire')
+TransactionType.create(id: 99, name: 'Miscellaneous')
 #Generate account types
-#AcctType.create(id: 1, name: 'savings', interest_rate: 0.99)
-#AcctType.create(id: 2, name: 'checking', interest_rate: 0.000)
-
+AcctType.create(id: 1, name: 'savings', interest_rate: 0.99)
+AcctType.create(id: 2, name: 'checking', interest_rate: 0.000)
+AcctType.create(id: 3, name: 'gold', interest_rate: 0.99)
 # Generate 100 users (with "customer" role) (Admins created separately)
 users = [] # Empty array to store users
 99.times do
@@ -109,8 +110,8 @@ end
 # Generate 100 addresses for addresses table to be assigned to customers
 100.times do |i|
 	a = Address.new
-		#address1 = Forgery('address').street_address
-		address1 = "#{FFaker::Address.street_address}"
+		address1 = Forgery('address').street_address
+		#address1 = "#{FFaker::Address.street_address}"
 		c = ZipCode.count
 		zipcode = ZipCode.offset(rand(c)).first
 

@@ -14,7 +14,7 @@ class CreateAcctTransactions < ActiveRecord::Migration
 	  end
 	  execute "ALTER TABLE acct_transactions ADD PRIMARY KEY (id);"
 	  add_index "acct_transactions", ["account_id"], name: "fk_acct_transactions_accounts1_idx", using: :btree
-	  add_index "acct_transactions", ["date", "id"], name: "BY_DATE", using: :btree
+	  #add_index "acct_transactions", ["date", "id"], name: "BY_DATE", using: :btree
 	  add_index "acct_transactions", ["transaction_type_id"], name: "fk_acct_transactions_transaction_types1_idx", using: :btree
   end
 

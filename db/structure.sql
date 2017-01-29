@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -57,8 +71,7 @@ CREATE TABLE acct_transactions (
     transaction_type_id integer NOT NULL,
     adjusted_bal numeric(10,2) NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    recipient_acct bigint
+    updated_at timestamp without time zone
 );
 
 
@@ -98,8 +111,10 @@ ALTER SEQUENCE acct_types_id_seq OWNED BY acct_types.id;
 
 CREATE TABLE addresses (
     customer_id bigint NOT NULL,
-    address1 character varying(60) NOT NULL,
-    address2 character varying(60),
+    address1 character varying(100) DEFAULT '--- {}
+'::character varying NOT NULL,
+    address2 character varying(100) DEFAULT '--- {}
+'::character varying,
     zip_code_zip_code character varying(5) NOT NULL
 );
 
@@ -112,7 +127,7 @@ CREATE TABLE administrators (
     id bigint NOT NULL,
     firstname character varying(40) NOT NULL,
     lastname character varying(40) NOT NULL,
-    user_id uuid NOT NULL,
+    user_id uuid DEFAULT uuid_generate_v4(),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -129,35 +144,9 @@ CREATE TABLE customers (
     title character varying(11),
     firstname character varying(40),
     lastname character varying(40),
-    user_id uuid NOT NULL,
+    user_id uuid DEFAULT uuid_generate_v4(),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
-);
-
-
---
--- Name: recipient_details; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE recipient_details (
-    id bigint NOT NULL,
-    recipient_name character varying(50) NOT NULL,
-    address text NOT NULL,
-    city character varying(50),
-    state character varying(50) NOT NULL,
-    country character varying(50) NOT NULL,
-    phone character varying(13) NOT NULL,
-    bank_account bigint NOT NULL,
-    bank_name character varying(50) NOT NULL,
-    bank_country character varying(50) NOT NULL,
-    routing character varying(20) NOT NULL,
-    status character varying DEFAULT 'pending'::character varying,
-    description text NOT NULL,
-    amount numeric(10,2) NOT NULL,
-    account_id bigint NOT NULL,
-    date timestamp without time zone NOT NULL,
-    transaction_type_id integer NOT NULL,
-    adjusted_bal numeric(10,2) NOT NULL
 );
 
 
@@ -216,7 +205,7 @@ CREATE TABLE transaction_types (
 --
 
 CREATE TABLE users (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     username character varying(30) DEFAULT ''::character varying NOT NULL,
     password character varying(30) DEFAULT ''::character varying NOT NULL,
     role character varying(30),
@@ -242,7 +231,20 @@ CREATE TABLE users (
 CREATE TABLE wire_transfers (
     id integer NOT NULL,
     acct_transaction_id bigint,
-    routing bigint NOT NULL
+    recipient_name character varying(50) NOT NULL,
+    address text NOT NULL,
+    city character varying(50),
+    state character varying(50) NOT NULL,
+    country character varying(50) NOT NULL,
+    phone character varying(13) NOT NULL,
+    bank_account bigint NOT NULL,
+    bank_name character varying(50) NOT NULL,
+    bank_country character varying(50) NOT NULL,
+    routing character varying(20) NOT NULL,
+    status character varying DEFAULT 'pending'::character varying,
+    description text NOT NULL,
+    date timestamp without time zone NOT NULL,
+    credited numeric(10,2) NOT NULL
 );
 
 
@@ -346,14 +348,6 @@ ALTER TABLE ONLY customers
 
 
 --
--- Name: recipient_details_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY recipient_details
-    ADD CONSTRAINT recipient_details_pkey PRIMARY KEY (id);
-
-
---
 -- Name: states_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -391,13 +385,6 @@ ALTER TABLE ONLY wire_transfers
 
 ALTER TABLE ONLY zip_codes
     ADD CONSTRAINT zip_codes_pkey PRIMARY KEY (zip_code);
-
-
---
--- Name: BY_DATE; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX "BY_DATE" ON acct_transactions USING btree (date, id);
 
 
 --
@@ -478,20 +465,6 @@ CREATE INDEX fk_customers_users1_idx ON customers USING btree (user_id);
 
 
 --
--- Name: fk_recipient_details1_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX fk_recipient_details1_idx ON recipient_details USING btree (account_id);
-
-
---
--- Name: fk_recipient_details_types1_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX fk_recipient_details_types1_idx ON recipient_details USING btree (transaction_type_id);
-
-
---
 -- Name: fk_zip_codes_states1_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -554,10 +527,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150226212208');
 INSERT INTO schema_migrations (version) VALUES ('20150226212231');
 
 INSERT INTO schema_migrations (version) VALUES ('20150228175219');
-
-INSERT INTO schema_migrations (version) VALUES ('20170123205954');
-
-INSERT INTO schema_migrations (version) VALUES ('20170125094757');
 
 INSERT INTO schema_migrations (version) VALUES ('20170126162147');
 

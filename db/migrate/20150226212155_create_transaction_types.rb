@@ -6,7 +6,7 @@ class CreateTransactionTypes < ActiveRecord::Migration
 	    t.string "name", limit: 30
 	  end
 	  execute "ALTER TABLE transaction_types ADD PRIMARY KEY (id);"
-          add_index "transaction_types", ["acct_transaction_id"], name: "fk_transaction_types_acct_transactions1_idx", using: :btree
+          #add_index "transaction_types", ["acct_transaction_id"], name: "fk_transaction_types_acct_transactions1_idx", using: :btree
   end
 
   def self.down

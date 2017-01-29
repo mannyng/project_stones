@@ -75,6 +75,11 @@ gem 'bootstrap_form'
 # Use Devise for authentication
 gem 'devise'
 
+group :production do
+ gem 'rails_12factor'
+ #ruby '2.2.6'
+end
+
 group :development, :test do
  gem "rspec-rails", '~> 3.5'
 end

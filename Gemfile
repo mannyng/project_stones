@@ -70,7 +70,7 @@ gem 'bootstrap_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Puma as the app server
-# gem 'puma'
+ gem 'puma'
 
 # Use Devise for authentication
 gem 'devise'

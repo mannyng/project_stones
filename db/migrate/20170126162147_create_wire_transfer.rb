@@ -19,7 +19,7 @@ class CreateWireTransfer < ActiveRecord::Migration
 
     end
      #add_index "wire_transfers", ["date", "id"], name: "BY_DATE", using: :btree
-     add_index "wire_transfers", ["acct_transaction_id"], name: "fk_wire_transfers_types1_idx", using: :btree
+    # add_index "wire_transfers", ["acct_transaction_id"], name: "fk_wire_transfers_types1_idx", using: :btree
   end
   def down
     drop_table :wire_transfers

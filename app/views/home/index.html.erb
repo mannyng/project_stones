@@ -10,7 +10,7 @@
   <p>
   	<% if user_signed_in? %>
   	<h4>You're already signed in, <%= current_user.username %>. Would you like to</h4>
-      <% unless current_user.role == 'admin' %>
+      <% unless admin? %>
        <span role=button><%= link_to "View Your Accounts?", accounts_path(current_user), :class => "btn btn-warning btn-lg" %></span>
       <% else %>
       <span role=button><%= link_to 'Continue to Administrator Dashboard', adminview_administrator_path(current_user), :class => 'btn btn-warning btn-lg' %></span>
@@ -19,13 +19,13 @@
   	<span role=button><%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn btn-danger btn-lg" %></span>
   	<% else %>
   	<span role=button><%= link_to "Sign in", new_user_session_path, :class => "btn btn-success btn-lg" %></span>
-  	<span role=button><%= link_to "Create an Account", new_user_registration_path, :class => "btn btn-primary btn-lg" %></span>
+  	<!--<span role=button><%#= link_to "Create an Account", new_user_registration_path, :class => "btn btn-primary btn-lg" %></span>-->
   	<% end %>
   </p>
   <br />
   <p style="font-size: 10pt; color: #000; background: #EEE">
   Phone: 800-555-1212<br />
-  E-mail: <%= mail_to "barnabasjbulpett@students.abtech.edu", "accounts@capstonesavings.com", :style=>"color: #000;font-size: 10pt;" %>
+  E-mail: <%= mail_to "al.abdimi@gmail.com", "accounts@witcofinance.com", :style=>"color: #000;font-size: 10pt;" %>
 </p>
 </aside>
   <div id="homeCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">

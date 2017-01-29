@@ -19,27 +19,28 @@
       </ul>
   <% end %>
         <!-- pre-filled (static) fields -->
-        <p>Transaction Type: <strong><%= @trans_type %></strong>
+        <p>Transaction Type: <strong><%= @trans_type %> Transfer</strong>
           <br />
           Date: <strong><%= Time.now.to_date %></strong></p>
         <!-- fields for AcctTransaction object -->
-    <%= f.fields_for :wire_transfers do |wire| %>
-     <%#= wire.text_field :recipient_name, :style =>"max-width: 550px;" %>
-     <%#= wire.text_field :address, :style =>"max-width: 550px;" %>
-     <%#= wire.text_field :city, :style =>"max-width: 250px;" %>
-     <%#= wire.text_field :state, :style =>"max-width: 250px;" %>
-     <%#= wire.text_field :country, :style =>"max-width: 250px;" %>
-     <%#= wire.telephone_field :phone, :style =>"max-width: 250px;" %>
-     <%#= wire.text_field :bank_name, :style =>"max-width: 250px;" %>
-        <%#= f.number_field :bank_account, :style =>"max-width: 250px;" %>
-     <%= wire.text_field :routing, :style =>"max-width: 250px;" %>
-     <%#= wire.text_field :bank_country, :style =>"max-width: 250px;" %>
-    <% end %>
     <%= f.text_field :description, :style =>"max-width: 550px;" %>
-    <%= f.text_field :recipient_acct, :style =>"max-width: 450px;" %> 
     <%= f.text_field :amount, :style =>"width: 160px;" %>
     <%= f.hidden_field :account_id, :value => params[:account_id] %>
     <%= f.hidden_field :transaction_type_id, :value => @acct_transaction.transaction_type_id %>     
+    <%= f.fields_for :wire_transfers do |wire| %>
+     <%= wire.text_field :bank_account, :label => "Bank Account Number", :style =>"max-width: 250px;" %>
+     <%= wire.text_field :routing, :label => "Bank Routing Number", :style =>"max-width: 350px;" %>
+      <%= wire.text_field :bank_name, :label => "Bank Name", :style =>"max-width: 350px;" %>
+     <%= wire.text_field :bank_country, :label => "Bank Country", :style =>"max-width: 250px;" %>
+
+     <%= wire.text_field :recipient_name, :label => "Recipient Name", :style =>"max-width: 550px;" %>
+     <%= wire.text_field :address, :label => "Recipient Address", :style =>"max-width: 550px;" %>
+     <%= wire.text_field :city, :label => "Recipient City", :style =>"max-width: 350px;" %>
+     <%= wire.text_field :state, :label => "Recipient State", :style =>"max-width: 350px;" %>
+     <%= wire.text_field :country, :label => "Recipient Contry", :style =>"max-width: 250px;" %>
+     <%= wire.telephone_field :phone, :label => "Recipient Phone", :style =>"max-width: 250px;" %>
+    <% end %>
+
       <div class="actions">
         <%= f.submit "Complete Transaction", :class => "btn btn-info"%>
       </div>

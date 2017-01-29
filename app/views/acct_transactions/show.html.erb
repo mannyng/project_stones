@@ -15,9 +15,20 @@
 			<li>Date: <%= @acct_transaction.date%></li>
 			<li>Amount: <%= number_to_currency(@acct_transaction.amount)%></li>
 			<li>Description: <%= @acct_transaction.description %></li>
-    <li>Recipient: <%= @acct_transaction.recipient_acct %></li>
-  <% unless @wire_transfer.nil? %>
-  <li>Routing: <%= @wire_transfer.routing %></li>
+    <% unless @wire_transfer.nil? %>
+    <li>Recipient Name: <%= @wire_transfer.recipient_name %></li>
+    <li>Amount Credited: <%= @wire_transfer.credited %></li>
+    <li>Recipient Account: <%= @wire_transfer.bank_account %></li>
+    <li>Recipient Address: <%= @wire_transfer.address %></li>
+    <li>Recipient City: <%= @wire_transfer.city %></li>
+    <li>Recipient State: <%= @wire_transfer.state %></li>
+    <li>Recipient Country: <%= @wire_transfer.country %></li>
+    <li>Recipient Bank: <%= @wire_transfer.bank_name %></li>
+    <li>Bank Routing: <%= @wire_transfer.routing %></li>
+    <li>Bank Country: <%= @wire_transfer.bank_country %></li>
+    <li>Transaction ID: <%= @wire_transfer.acct_transaction_id%></li>
+    <li>Description: <%= @wire_transfer.description %></li>
+
   <% end %>
 		</ul>
 	<div>

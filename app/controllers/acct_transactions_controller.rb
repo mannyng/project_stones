@@ -29,7 +29,6 @@ class AcctTransactionsController < ApplicationController
       @acct_transaction = AcctTransaction.new
       @acct_transaction.id = SecureRandom.random_number(99999999999999)
       @acct_transaction.account_id = params[:account_id]
-      @acct_transaction.recipient_acct = params[:recipient_acct]
       @acct_transaction.date = Time.now
       @acct_transaction.transaction_type_id = params[:transaction_type_id]
       @acct_transaction.amount = params[:amount]
@@ -50,8 +49,10 @@ class AcctTransactionsController < ApplicationController
     @acct_transaction.date = Time.now
     #@wire_transfer = @acct_transaction.wire_transfers.build
     #@acct_transaction.wire_transfers.routing = params[:routing]
+    if @acct_transaction.valid?
     adjust_balance
-
+    end
+ 
     respond_to do |format|
       if @acct_transaction.save
         modify_acct_balance

@@ -24,7 +24,6 @@
           Date: <strong><%= Time.now.to_date %></strong></p>
         <!-- fields for AcctTransaction object -->
         <%= f.text_field :description, :style =>"max-width: 550px;" %>
-        <%= f.text_field :recipient_acct, :style =>"max-width: 450px;" %> 
         <%= f.text_field :amount, :style =>"width: 160px;" %>
         <%= f.hidden_field :account_id, :value => params[:account_id] %>
         <%= f.hidden_field :transaction_type_id, :value => @acct_transaction.transaction_type_id %>

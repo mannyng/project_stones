@@ -18,7 +18,7 @@ class CreateWireTransfer < ActiveRecord::Migration
      t.decimal "credited", precision: 10, scale: 2, null: false
 
     end
-      add_index "wire_transfers", ["date", "id"], name: "BY_DATE", using: :btree
+     #add_index "wire_transfers", ["date", "id"], name: "BY_DATE", using: :btree
      add_index "wire_transfers", ["transaction_type_id"], name: "fk_wire_transfers_types1_idx", using: :btree
   end
   def down

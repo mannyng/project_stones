@@ -1,0 +1,39 @@
+<!--  Barnabas Bulpett
+      WEB-289-YD1
+      Spring 2015
+      accounts/_form.html.erb
+-->
+<!-- Dynamically generated partial for Account forms -->
+  <div class="panel panel-default formPanel">  
+
+  <%= bootstrap_form_for(@account) do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+  <% end %>
+        
+        <div id="tip">
+        <p>What type of account?</p>
+        </div>
+        <!-- fields for Account object -->
+        <%= f.collection_radio_buttons :acct_type_id, AcctType.all, :id, :name, required: true %>
+        <p style="color: #F00; font-size: 9pt; line-height: 1.2em;"><em>IMPORTANT! This site is for demonstration purposes only.  Accounts are not "real" bank accounts and shall therefore handle no exchange of equity!</em></p>
+      <div class="actions">
+        <ul id="formButtonGroup">
+          <% if current_user.role == 'admin' %>
+            <li><%= f.submit "Update", :class => "btn btn-info"%></li>
+          <% else %>
+            <li><%= link_to 'Cancel', destroy_session_path(current_user), :method => :delete, :class => "btn btn-danger formButton", data: {confirm: "Are you sure you want to cancel your registration? You'll have to start all over!"} %></li>
+            <li><%= f.submit "Next", :class => "btn btn-success formButton" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>

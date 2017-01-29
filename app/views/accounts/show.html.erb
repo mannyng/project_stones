@@ -1,0 +1,61 @@
+<!--  Barnabas Bulpett
+      WEB-289-YD1
+      Spring 2015
+      accounts/show.html.erb
+-->
+<!-- Dynamically generated partial for Account model -->
+<!-- This data may be called by users to show their account's transaction history, and by administrators
+      via the "manage transactions" link in the Admin Dashboard, where it invokes the "index" method of the
+      AcctTransaction model -->
+
+<p id="notice"><%= notice %></p>
+<h1>Details for Account No. <%= @account.id %> </h1>
+<h3>Available Balance as of <%= Time.now.to_date %>: <%= number_to_currency(@account.balance) %></h3>
+<main>
+    <%= paginate (@acct_transactions) %>
+    <table class="table table-striped">
+      <thead>
+      	<caption><strong>Transaction History</strong>
+            <%= form_tag account_path, :method => 'get', :id => "search-form", :class => "searchBox" do %>
+            <%= text_field_tag :search, params[:search], placeholder: 'Search Transactions', required: true  %>
+            <%= select_tag("search_criteria", options_for_select([['by transaction id', '1'],['by type', '2'],['by description', '3']], selected: '1')) %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+        </caption>
+        <tr>
+          <th>Date</th>
+          <th class="hide-large">Transaction ID</th>
+          <th class="hide-medium">Description</th>
+          <th class="hide-small">Type</th>
+          <th>Amount</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      	<% if @wire_transfers && @acct_transaction.blank? %>
+          <tr><td colspan='6' style="text-align: center;"><h4>There are no transactions to display</h4></td></tr>
+      	<% else %>
+      	<!--- Put transaction display logic here -->
+           <% for trans in  @acct_transactions do %>
+            <tr>
+              <td> <%= trans.date.strftime("%m/%d/%Y at %I:%M%p") %> </td>
+              <td class="hide-large"> <%= link_to trans.id, acct_transaction_path(:id => trans.id)  %> </td>
+              <td class="hide-medium"> <%= trans.description %></td>
+              <td class="hide-small"> <%= TransactionType.find(trans.transaction_type_id).name %> </td>
+              <td> <%= number_to_currency(trans.amount) %></td>
+              <td><%= number_to_currency(trans.adjusted_bal) %></td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate (@acct_transactions) %>
+<div id="links-block">
+<%= link_to 'Back', :back, :class => "btn btn-primary formButton" %>
+<%= link_to 'Close Account', @account, :class => "btn btn-danger formButton", method: :delete, data: { confirm: 'Are you sure you want to close this account?' } %>
+<% unless current_user.role == 'admin' %>
+<%= link_to "Accounts Overview", accounts_path(current_user), :class => 'btn btn-success formButton' %>
+<% end %>
+</div>
+
+</main>

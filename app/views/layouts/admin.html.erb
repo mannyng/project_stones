@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- 	Barnabas Bulpett, Web Technologies System Project WEB-289-D1, Spring 2015 -->
+<!--	Basic layout for admin views -->
+<html>
+<head>
+	<title>Capstone Savings Bank</title>
+  	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<!-- Links for stylesheets -->
+	<%= stylesheet_link_tag "tranquil_mountain", title: "tranquil_mountain" %>
+	<%= stylesheet_link_tag "tropical_shores", title: "tropical_shores" %>
+	<%= stylesheet_link_tag "winter_sunrise", title: "winter_sunrise" %>
+	<!-- Declare a default stylesheet -->
+	<meta http-equiv="Default-Style" content="winter_sunrise"> 
+	<!-- Load javascripts -->
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<%= favicon_link_tag 'capstone_icon.png' %>
+</head>
+<body onload="set_style_from_cookie()">
+	<!-- render main navigation partial -->
+	<%= render 'navigation' %>
+	<% if notice %>
+	  <p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
+	<% end %>
+	<main>
+		<!-- render "Admin-only" navigation partial -->
+		<%= render partial: 'admin_navigation' %>
+		<div id="admin_content">
+			<% if content_for?(:admin_content) %>
+			<!-- dynamically render page content -->
+				<%= yield(:admin_content) %>
+			<% else %>
+				<h3>Welcome to the Administrators Dashboard</h3>
+				<p>Please select an action above to get started</p>
+			<% end %>
+		</div>
+	</main>
+	<!-- render footer partial -->
+	<%= render 'footer' %>
+</div>
+</body>
+</html>

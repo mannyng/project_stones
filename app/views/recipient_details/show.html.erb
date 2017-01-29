@@ -1,0 +1,28 @@
+
+<main>
+	<div id="panel">
+		<!-- Display attributes for chosen AcctTransaction object -->
+		<h3>Summary for Transaction no. <%= @recipient_detail.id %></h3>
+		<ul>
+			<li>Account: <%= @recipient_detail.account_id%></li>
+			<li>Type: <%= TransactionType.find(@recipient_detail.transaction_type_id).name %></li>
+			<li>Date: <%= @recipient_detail.date%></li>
+			<li>Amount: <%= number_to_currency(@recipient_detail.amount)%></li>
+			<li>Description: <%= @recipient_detail.description %></li>
+    <li>Recipient Account: <%= @recipient_detail.bank_account %></li>
+    <li>Recipient Name: <%= @recipient_detail.recipient_name %></li>
+    <li>Recipient Bank: <%= @recipient_detail.bank_name %></li>
+    <li>Payment Status: <%= @recipient_detail.status %></li>
+		</ul>
+	<div>
+	<!-- Action buttons -->
+	<div id="links-block">
+		<% if current_user.role == 'admin' %>
+		<%= link_to 'Back', :back, :class => "btn btn-primary formButton"  %>
+		<%= link_to 'Return to Dashboard', manage_acct_transactions_administrator_path, :class => "btn btn-info formButton"  %>
+		<% else %>
+		<%= link_to 'Back to Account', account_path(@recipient_detail.account_id), :class => "btn btn-primary formButton"  %>
+		<% end %>
+	</div>
+</main>
+

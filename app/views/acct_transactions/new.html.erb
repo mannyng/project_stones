@@ -1,0 +1,19 @@
+<!--  Barnabas Bulpett
+      WEB-289-YD1
+      Spring 2015
+      acct_transactions/new.html.erb
+-->
+<!-- Dynamically generated partial for new AcctTransaction model -->
+<h2>New Account Transaction for Account No. <%= params[:account_id] %></h2>
+
+<% if params[:transaction_type_id] = 9 %>
+<%= render 'wireform' %>
+<% else %>
+<%= render 'form' %>
+<% end %>
+
+<%#= render 'form' %>
+
+<div id="links-block">
+<%= link_to 'Back', accounts_path(current_user), :class => 'btn btn-primary' %>
+</div>

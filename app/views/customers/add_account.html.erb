@@ -1,0 +1,31 @@
+<h1>Add An Account</h1>
+<h2>Account Type</h2>
+
+  <div class="panel panel-default" style="width: 50%; padding: 0 25px;">  
+
+  <%= bootstrap_form_for(@account) do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+  <% end %>
+        
+        <div id="tip">
+        <p>Pick a flavor...</p>
+        </div>
+        <!-- fields for Account object -->
+        <%= f.collection_select(:acct_type_id, AcctType.all, :id, :name, {:include_blank => 'Choose an Account Type'} )%>
+
+      <br />
+      <div class="actions">
+        <%= f.submit "Next", :class => "btn btn-info", :style => 'margin-bottom: 25px;'%>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,41 @@
+<!-- Dynamically generated partial for AcctTransaction model forms-->
+<main>
+<div class="panel" style="margin: 10px; padding: 20px;">  
+
+  <%= bootstrap_form_for(@recipient_detail) do |f| %>
+  <% if @recipient_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipient_detail.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @recipient_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+  <% end %>
+        <!-- pre-filled (static) fields -->
+        <p>Transaction Type: <strong><%= @trans_type %></strong>
+          <br />
+          Date: <strong><%= Time.now.to_date %></strong></p>
+        <!-- fields for AcctTransaction object -->
+     <%= f.text_field :recipient_name, :style =>"max-width: 550px;" %>
+     <%= f.text_field :address, :style =>"max-width: 550px;" %>
+     <%= f.text_field :city, :style =>"max-width: 250px;" %>
+     <%= f.text_field :state, :style =>"max-width: 250px;" %>
+     <%= f.text_field :country, :style =>"max-width: 250px;" %>
+     <%= f.telephone_field :phone, :style =>"max-width: 250px;" %>
+     <%= f.text_field :bank_name, :style =>"max-width: 250px;" %>
+     <%= f.text_field :bank_account, :style =>"max-width: 250px;" %>
+     <%= f.text_field :routing, :style =>"max-width: 250px;" %>
+     <%= f.text_field :bank_country, :style =>"max-width: 250px;" %>
+    
+    <%= f.text_field :description, :style =>"max-width: 550px;" %>
+    <%= f.text_field :amount, :style =>"width: 160px;" %>
+    <%= f.hidden_field :account_id, :value => params[:account_id] %>
+    <%= f.hidden_field :transaction_type_id, :value => @recipient_detail.transaction_type_id %>     
+      <div class="actions">
+        <%= f.submit "Complete Transaction", :class => "btn btn-info"%>
+      </div>
+    <% end %>
+  </div>
+</main>

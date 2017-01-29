@@ -1,0 +1,14 @@
+/** Barnabas Bulpett; WEB-289-YD1; Spring 2015; tropical_shores.sass **/
+/** Sass stylesheet that provides parameters specific to the "Tropical Shores" theme **/
+
+@import "basic_styles.sass"
+
+$bg_color: #FFF
+$bg_image: "tropical_shores_bg_optimized.jpg"
+$body_text_color: #FFF
+$panel_heading_color: #0D60A4
+$secondary_theme_color: lighten($panel_heading_color, 30%)
+$tertiary_theme_color: darken($panel_heading_color, 15%)
+$bg_transparency: rgba(255,255,255,0.3)
+
+@include basic_styles($bg_color, $bg_image, $body_text_color, $panel_heading_color, $secondary_theme_color, $tertiary_theme_color, $bg_transparency)

@@ -1,0 +1,34 @@
+<!-- 	Barnabas Bulpett
+		WEB-289-YD1
+		Spring 2015
+		acct_transactions/show.html.erb
+-->
+<!-- Dynamic view (partial) showing details of transaction -->
+
+<main>
+	<div id="panel">
+		<!-- Display attributes for chosen AcctTransaction object -->
+		<h3>Summary for Transaction no. <%= @acct_transaction.id %></h3>
+		<ul>
+			<li>Account: <%= @acct_transaction.account_id%></li>
+			<li>Type: <%= TransactionType.find(@acct_transaction.transaction_type_id).name %></li>
+			<li>Date: <%= @acct_transaction.date%></li>
+			<li>Amount: <%= number_to_currency(@acct_transaction.amount)%></li>
+			<li>Description: <%= @acct_transaction.description %></li>
+    <li>Recipient: <%= @acct_transaction.recipient_acct %></li>
+  <% unless @wire_transfer.nil? %>
+  <li>Routing: <%= @wire_transfer.routing %></li>
+  <% end %>
+		</ul>
+	<div>
+	<!-- Action buttons -->
+	<div id="links-block">
+		<% if current_user.role == 'admin' %>
+		<%= link_to 'Back', :back, :class => "btn btn-primary formButton"  %>
+		<%= link_to 'Return to Dashboard', manage_acct_transactions_administrator_path, :class => "btn btn-info formButton"  %>
+		<% else %>
+		<%= link_to 'Back to Account', account_path(@acct_transaction.account_id), :class => "btn btn-primary formButton"  %>
+		<% end %>
+	</div>
+</main>
+

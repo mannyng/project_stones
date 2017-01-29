@@ -1,0 +1,591 @@
+/** Barnabas Bulpett; WEB-289-YD1; Spring 2015; basic_styles.sass **/
+/** Base stylesheet defining global styles, injected with params from specific themes **/
+/**	This file defines basic styles common to all pages and all themes **/
+
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
+// Vendor prefix mixin for border-radius property
+@mixin border-radius($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	-ms-border-radius: $radius
+	border-radius: $radius
+
+// RWD variables
+$break-xs: 360px
+$break-s: 480px
+$break-m: 680px
+$break-l: 920px
+$break-xl: 1100px
+$break-xxl: 1240px
+
+// Mixin defining common layout and styles
+@mixin basic_styles($bg_color, $bg_image, $body_text_color, $panel_heading_color, $secondary_theme_color, $tertiary_theme_color, $bg_transparency)
+	// Font definitions
+	@font-face
+		font-family: 'Glyphicons Halflings'
+		src: url('/assets/glyphicons-halflings-regular.eot')
+		src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+
+	@font-face 
+		font-family: 'Cinzel-Regular'
+		src: font-url('Cinzel-Regular.ttf')
+
+	@font-face 
+		font-family: 'Oxygen'
+		src: font-url('Oxygen.otf')
+
+	// Global page elements
+	*
+		box-sizing: border-box
+		-moz-box-sizing: border-box
+		-webkit-box-sizing: border-box
+
+	html
+		position: relative
+		min-height: 100%
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.002)
+		-webkit-font-smoothing: antialiased
+		-moz-font-smoothing: antialiased
+		-o-font-smoothing: antialiased
+		font-smoothing: antialiased
+
+	body
+		background: $bg_color asset-url($bg_image) no-repeat center top
+		font: normal normal 12pt 'Oxygen', Verdana, sans-serif
+		margin: 0 0 100px
+		min-width: 320px
+		-webkit-background-size: cover
+		-moz-background-size: cover
+		-o-background-size: cover
+		background-size: cover
+		height: 100%
+
+	footer 
+		position: absolute
+		left: 0 
+		bottom: 0
+		background: rgba(25,25,25,0.8)
+		color: #FFF
+		width: 100%
+		margin: 0
+		font-size: 65%
+		padding: 10px 15px 0px
+		line-height: 1.55em
+		height: 70px
+		overflow: visible
+
+		p
+			float: left
+		ul
+			float: right
+			list-style: none
+
+		a
+			color: #F9F
+			text-decoration: none
+
+		a:hover
+			color: #F93
+			text-decoration: none
+
+		a:active
+			color: #F9F
+			font-weight: bold
+			text-decoration: none
+			text-shadow: 1px 1px 0px #FAF
+
+		@media screen and (max-width: $break-m)
+			height: auto
+
+			p, ul
+				float: none
+
+			ul
+				padding: 0
+				text-align: center
+
+			li
+				display: inline
+				padding: 0 10px
+
+			li:not(:last-of-type)
+				border-right: 1px solid #F9F
+
+	main 
+		margin: 20px auto
+		background: $bg_transparency
+		padding: 10px
+		width: 95%
+		clear: both
+
+	main>h1 
+		font-size: 180%
+
+	h1, h2, h3
+		text-indent: 20px
+
+	main, #panel, .btn, .admin-nav, .actionPanel, #homeCarousel
+		@include border-radius(2px)
+
+	article
+		width: 95%
+		margin: 10px auto 20px
+		overflow: hidden
+
+	.panel-body
+		h2
+			color: #FFF !important
+			@include border-radius(2px)
+			padding: 10px
+			background-color: $panel_heading_color
+			width: 96.5%
+
+	.admin-nav>a, .header-message, th, .navbar-brand, .navbar-brand:active, .navbar-brand:visited, h1, h2, h3, #homeCarousel
+		color: #FFF
+
+	.header-message
+		font: italic 400 14pt 'Oxygen', Verdana, sans-serif
+		padding: 0 10px
+		line-height: 1.25em
+		width: 135px
+
+		@media screen and (max-width: $break-xl)
+			font-size: 85%
+			width: 100px
+			padding: 7px 5px
+
+	#content
+		h1, h2, h3
+			color: $body_text_color
+			margin-left: 1.75%
+
+		h1
+			@media screen and (max-width: $break-s)
+				text-align: center
+
+	// Messages and alerts
+	.alert
+		margin: 0.26em 0 
+		position: absolute
+		width: 100%
+		@include border-radius(0)
+		padding: 0.2em 1em
+		font-weight: 700
+		-webkit-animation: alertFades 2s linear 1s 1 forwards
+		-moz-animation: alertFades 2s linear 1s 1 forwards
+		-o-animation: alertFades 2s linear 1s 1 forwards
+		animation: alertFades 2s linear 1s 1 forwards
+
+	@-webkit-keyframes alertFades
+		0%
+			opacity: 1
+		100%
+			opacity: 0
+
+	@-mos-keyframes alertFades
+		0%
+			opacity: 1
+		100%
+			opacity: 0
+
+	@-o-keyframes alertFades
+		0%
+			opacity: 1
+		100%
+			opacity: 0
+		
+	@keyframes alertFades
+		0%
+			opacity: 1
+		100%
+			opacity: 0
+
+	#tip 
+		background-color: #CCF
+		margin: 20px 10px
+		padding: 10px 10px 3px
+		font-size: 88%
+
+	// Tables, forms, and buttons
+	.jumbotron
+		width: 33%
+		background: rgba(0,0,0,0)
+		text-align: center
+		margin: 10px 20px
+		float: left
+
+		h1
+			text-indent: 0
+
+		@media screen and (max-width: $break-l)
+			float: none
+			margin: 0 auto
+
+		@media screen and (max-width: $break-s)
+			width: 90%
+
+	.formButton
+		margin-top: 15px
+
+	table
+		margin: 0 auto 30px
+		background: #FFF
+		min-width: 251px
+
+		caption
+			background-color: $panel_heading_color
+			color: #EEE
+			text-indent: 10px
+			padding-top: 15px
+			overflow: visible
+
+			strong
+				@media screen and (max-width: $break-m)
+					float: left
+
+	th 
+		background: #555
+
+		@media screen and (max-width: $break-xs)
+			font-weight: normal
+			font-size: 80%
+
+	td
+		font-size: 10pt
+
+		@media screen and (max-width: $break-xs)
+			font-size: 80%
+
+	.hide-small
+		@media screen and (max-width: $break-s)
+			display: none
+	.hide-medium
+		@media screen and (max-width: $break-m)
+			display: none
+	.hide-large
+		@media screen and (max-width: $break-l)
+			display: none
+
+	.searchBox 
+		height: 20px
+		input, select
+			color: #000
+			margin: 0 10px
+			line-height: 30px
+
+			@media screen and (max-width: $break-s)
+				margin: 0
+				width: 30%
+
+		select
+			color: #FFF
+			background: rgba(0,0,0,0.35)
+
+	#search_criteria
+		line-height: 22px
+
+	.pagination
+		display: inline-block
+		margin: 0 auto
+		background-color: #111
+		width: 100%
+		min-width: 251px
+		padding: 0 10px
+		@include border-radius(2px 2px 0 0)
+		word-spacing: 5px
+
+		.page a, .next a, .last a, .prev a, .first a
+			color: #BBB
+
+		.page a:hover, .next a:hover, .last a:hover, .prev a:hover, .first a:hover
+			color: #FFF
+			text-decoration: none
+
+		.current
+			color: #FFF
+			font-weight: 800
+			text-shadow: 0 0 2px 2px #FFF
+
+	.table-heading
+		color: #333
+		display: inline
+
+	#search-form
+		float: right
+		margin-top: -5px
+		margin-bottom: 10px
+
+	#formButtonGroup
+		list-style-type: none
+		margin: 0 0 15px 0
+
+		li
+			display: inline
+			margin-right: 10px
+
+		nav:not(.pagination)
+			margin: 0
+			padding: 15px 0
+
+	// Navigation
+	nav:not(.pagination)
+		margin: 0
+		padding: 15px 0
+
+	.actions
+		margin: 30px 0 0 0
+
+	.btn
+		white-space: normal
+
+	#links-block
+		margin: 5px 10px
+		padding: 0
+
+	.navbar
+		background: rgba(0,0,0,0.2)
+		border: none
+		margin-bottom: 35px
+
+	.navbar-header
+		@media screen and (max-width: $break-m)
+			padding-bottom: 15px
+
+		img
+			height: 50px
+			overflow: visible
+			margin: 0 15px
+
+		@media (min-width: 979px)
+			ul.nav li.dropdown:hover > ul.dropdown-menu
+				display: block
+
+		.navbar-brand
+			margin-right: 0
+			padding-right: 0
+			font-family: 'Cinzel-Regular', serif
+			font-weight: 500
+			font-size: 34pt
+			@media screen and (max-width: $break-xxl)
+				font-size: 28pt
+			@media screen and (max-width: $break-xl)
+				padding-top: 0
+				line-height: 26px
+				width: 300px
+				font-size: 24pt
+			@media screen and (max-width: $break-l)
+				font-size: 18pt
+				width: 200px
+				padding: 0 15px
+			@media screen and (max-width: $break-s)
+				width: 120px
+				padding: 0 20px
+
+	.navbar-header
+		.navbar-brand:active
+			text-shadow: 0px 0px 10px rgba(255,255,255,1)
+
+	.nav
+		.btn
+			margin-top: 4px
+			font-weight: 600
+			@media screen and (max-width: $break-xxl)
+				font-size: 85%
+				padding: 9px
+				margin-top: 6px
+			@media screen and (max-width: $break-xl)
+				font-size: 75%
+				padding: 7px
+				margin-top: 7px
+		.btn-success:hover
+			background: #360
+		.btn-primary:hover
+			background: #036
+		.btn-default:hover
+			background: #AAA
+
+		li.active
+			a
+				background: $panel_heading_color
+			a:hover
+				background: $secondary_theme_color
+
+	.admin-nav
+		background: $panel_heading_color
+		color: #FFF
+
+		ul
+			border: none
+		li
+			text-indent: none
+			margin: 0 2px
+			
+			a
+				color: #FFF
+				background: $tertiary_theme_color
+
+			a:hover
+				background: #secondary_theme_color
+				color: #000
+
+			@media screen and (max-width: $break-m)
+				font-size: 11pt
+				margin: 5px auto 0
+				width: 75%
+		li.active
+			a
+				background: #FFF
+			a:hover
+				background: #AAA
+
+	// Special features
+	.actionPanel
+		margin: 35px
+		background: $bg_transparency
+		padding: 10px
+		width: 280px
+		text-align: center
+
+		a
+			margin: 10px 0
+		h1, h2, h3
+			color: #333
+			text-indent: 0
+		@media screen and (max-width: $break-m)
+			width: 91%
+			margin: 20px 4.5%
+
+			a
+				width: 75%
+
+	#homeCarousel
+		background: transparent
+		padding: 10px
+		width: 67%
+		height: 280px
+		text-align: center
+		margin: 35px 0 
+		color: $body_text_color
+
+		@media screen and (max-width: $break-xxl)
+			width: 62%
+		@media screen and (max-width: $break-xl)
+			width: 57%
+		@media screen and (max-width: $break-l)
+			width: 48.5%
+		@media screen and (max-width: $break-m)
+			width: 91%
+			margin: 0 4.5% 85px
+		@media screen and (max-width: $break-s)
+			margin-bottom: 100px
+
+		.carousel-control
+			position: absolute
+			background-image: none
+			font-size: 54pt
+			width: 25px
+			height: 50px
+			top: 22.3%
+
+	.carousel-caption
+		color: $body_text_color
+		left: 0
+		text-align: center
+		position: static
+
+		a
+			color: $body_text_color
+
+	.carousel-inner h1
+		font-size: 32pt
+		text-indent: 0
+
+	.item
+		display: block
+
+	.searchBox, .navbar-header>img, #formButtonGroup
+		padding: 0
+
+	.actionPanel, #homeCarousel, .navbar-header>img
+		float: left
+
+	.dropdown-menu
+		background: rgba(255,255,255,0.5)
+		padding: 10px 5px
+		em
+			color: #444
+			font-weight: 600
+		li 
+			text-indent: 5%
+
+		input
+			color: #EEE
+			border: none
+			@include border-radius(2)
+			box-shadow: 0px 0px 5px #222
+			-moz-box-shadow: 0px 0px 5px #222
+			-webkit-box-shadow: 0px 0px 5px #222
+			padding: 0
+			width: 90%
+			margin: 5px auto
+
+		background: 222
+		padding: initial
+		color: #FFF
+
+	.settings-form
+		input
+			border: none
+			background: #FFF
+			margin: 2px
+	#panel
+		width: 95%
+		margin: 12px auto
+		background: #FFF
+		padding: 5px 10px 10px 10px
+
+		h1, h2, h3
+			color: $panel_heading_color
+			margin: 15px 0 
+
+	.formPanel
+		width: 50%
+		margin: 10px 20px
+		padding: 0 25px
+		line-height: 2em
+
+	#customer_title.form-control
+		height: 3em
+		width: 5em
+
+	.articleHead
+		color: $panel_heading_color !important
+		text-indent: 0
+
+	#error_explanation
+		h2
+			color: #F00 !important
+			text-indent: 0
+			text-align: center
+
+	#captchaFrame
+		background: $panel_heading_color
+		margin: 10px auto
+		padding: 5px
+		text-align: center
+		width: 313px
+
+	// Images
+	#about_image
+		width: 65%
+		max-width: 496px
+		box-shadow: 0px 0px 5px #FFF
+		-moz-box-shadow: 0px 0px 5px #FFF
+		-webkit-box-shadow: 0px 0px 5px #FFF
+		float: right
+
+		@media screen and (max-width: $break-l)
+			float: none
+			margin: 0 17.5%

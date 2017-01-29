@@ -1,0 +1,25 @@
+/** Barnabas Bulpett; WEB-289-YD1; Spring 2015; tranquil_mountain.sass **/
+/** Sass stylesheet that provides parameters specific to the "Tranquil Mountain" theme **/
+
+@import "basic_styles.sass"
+
+$bg_color: #175413
+$bg_image: "tranquil_mountain_bg_optimized.jpg"
+$body_text_color: #111
+$panel_heading_color: #1e912d
+$secondary_theme_color: lighten($panel_heading_color, 30%)
+$tertiary_theme_color: darken($panel_heading_color, 15%)
+$bg_transparency: rgba(0,0,0,0.1)
+
+@include basic_styles($bg_color, $bg_image, $body_text_color, $panel_heading_color, $secondary_theme_color, $tertiary_theme_color, $bg_transparency)
+
+#homeCarousel
+	h1, h3, a
+		@media screen and (max-width: $break-m)
+			color: #EEE
+
+.carouselControl
+	color: #111
+	
+	@media screen and (max-width: $break-m)
+		color: #EEE

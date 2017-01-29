@@ -1,0 +1,48 @@
+<!--  Barnabas Bulpett
+      WEB-289-YD1
+      Spring 2015
+      acct_transactions/_form.html.erb
+-->
+<!-- Dynamically generated partial for AcctTransaction model forms-->
+<main>
+<div class="panel" style="margin: 10px; padding: 20px;">  
+
+  <%= bootstrap_form_for(@acct_transaction) do |f| %>
+  <% if @acct_transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@acct_transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @acct_transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+  <% end %>
+        <!-- pre-filled (static) fields -->
+        <p>Transaction Type: <strong><%= @trans_type %></strong>
+          <br />
+          Date: <strong><%= Time.now.to_date %></strong></p>
+        <!-- fields for AcctTransaction object -->
+    <%= f.fields_for :wire_transfers do |wire| %>
+     <%#= wire.text_field :recipient_name, :style =>"max-width: 550px;" %>
+     <%#= wire.text_field :address, :style =>"max-width: 550px;" %>
+     <%#= wire.text_field :city, :style =>"max-width: 250px;" %>
+     <%#= wire.text_field :state, :style =>"max-width: 250px;" %>
+     <%#= wire.text_field :country, :style =>"max-width: 250px;" %>
+     <%#= wire.telephone_field :phone, :style =>"max-width: 250px;" %>
+     <%#= wire.text_field :bank_name, :style =>"max-width: 250px;" %>
+        <%#= f.number_field :bank_account, :style =>"max-width: 250px;" %>
+     <%= wire.text_field :routing, :style =>"max-width: 250px;" %>
+     <%#= wire.text_field :bank_country, :style =>"max-width: 250px;" %>
+    <% end %>
+    <%= f.text_field :description, :style =>"max-width: 550px;" %>
+    <%= f.text_field :recipient_acct, :style =>"max-width: 450px;" %> 
+    <%= f.text_field :amount, :style =>"width: 160px;" %>
+    <%= f.hidden_field :account_id, :value => params[:account_id] %>
+    <%= f.hidden_field :transaction_type_id, :value => @acct_transaction.transaction_type_id %>     
+      <div class="actions">
+        <%= f.submit "Complete Transaction", :class => "btn btn-info"%>
+      </div>
+    <% end %>
+  </div>
+</main>

@@ -1,0 +1,23 @@
+<!-- <p id="notice"><%= notice %></p> -->
+<div id="panel">
+	<h2>Customer Details</h2>
+	<article>
+		<h3 style="text-indent: 0;"><%= @customer.title %> <%= @customer.firstname %> <%= @customer.lastname %></h3>
+		<p><strong>Customer ID:</strong>  <%= @customer.id %></p>
+		<p><strong>Phone (primary):</strong>  <%= @customer.phone1 %></p>
+		<p><strong>Phone (secondary):</strong>  <%= @customer.phone2 %></p>
+		<p><strong>Email:</strong>  <%= mail_to @customer.user.email %></p>
+		<p><strong>Mailing Address:</strong><br />
+			<%= @customer.address.address1 %><br />
+			<% unless @customer.address.address2.blank? %>
+				<%= @customer.address.address2 %><br />
+			<% end %>
+			<%= @city + ", " + @state %>
+			<%= "\t" + @customer.address.zip_code_zip_code %><br />
+		</p>
+	</article>
+	<div id="links-block">
+	<%= link_to 'Edit', edit_customer_path(@customer) , :class => "btn btn-warning formButton" %>
+	<%= link_to 'Back', manage_customers_administrator_path, :class => "btn btn-primary formButton"  %>
+</div>
+</div>

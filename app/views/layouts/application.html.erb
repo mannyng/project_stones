@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 	Barnabas Bulpett, Web Technologies System Project WEB-289-D1, Spring 2015 -->
+<!-- 	Basic layout for public and basic view -->
+<html>
+<head>
+	<title>Witco Financial Services</title>
+  	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<!-- Links for stylesheets -->
+	<%= stylesheet_link_tag "tranquil_mountain", title: "tranquil_mountain" %>
+	<%= stylesheet_link_tag "tropical_shores", title: "tropical_shores" %>
+	<%= stylesheet_link_tag "winter_sunrise", title: "winter_sunrise" %>
+	<!-- Declare a default stylesheet -->
+	<meta http-equiv="Default-Style" content="winter_sunrise"> 
+	<!-- Load javascripts -->
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<%= favicon_link_tag 'capstone_icon.png' %>
+</head>
+<body onload="set_style_from_cookie()">
+	<!-- render main navigation partial -->
+	<%= render 'navigation' %>
+	<% if notice %>
+	  <p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
+	<% end %>
+	<div id='content'>
+		<!-- dynamically render page content -->
+		<%= yield %>
+	</div>
+	<!-- render footer partial -->
+	<%= render 'footer' %>
+</body>
+</html>

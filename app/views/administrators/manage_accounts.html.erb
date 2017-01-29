@@ -1,0 +1,42 @@
+<% content_for :admin_content do %>
+  <h3 class="table-heading"><%= @table_heading %></h3>
+  <%= form_tag manage_accounts_administrator_path, :method => 'get', :id => "search-form" do %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search Accounts', required: true %>
+      <%= select_tag("search_criteria", options_for_select([['by account number', '1'],['by customer id', '2'],['by customer last name', '3']], selected: '1', disabled: '3')) %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+  <br />
+    <%= paginate (@accounts) %>
+    <table id="indexTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th class="hide-medium">Account Type</th>
+          <th>Customer Name</th>
+          <th class="hide-medium">Customer ID</th>
+          <th class="hide-small">Balance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @accounts.blank? %>
+          <tr><td colspan='5' style="text-align: center;"><h4>There are no accounts to display</h4></td></tr>
+        <% else %>
+          <% @accounts.each do |account| %>
+          <tr>
+            <td><%= account.id %></td>
+            <td class="hide-medium"><%= AcctType.find(account.acct_type_id).name %>
+            <td><%= account.customer.lastname %>, <%= account.customer.firstname %></td>
+            <td class="hide-medium"><%= account.customer_id %></td>
+            <td class="hide-small"><%= number_to_currency(account.balance) %></td>
+
+            <td><%= link_to 'Show', account_path(account), :class=> "btn btn-default" %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate (@accounts) %>
+  <br />
+  <%= link_to 'Back', :back, :class => "btn btn-primary formButton"  %>
+<% end %>

@@ -1,0 +1,42 @@
+<% content_for :admin_content do %>
+  <h3 class="table-heading"><%= @table_heading %></h3>
+  <%= form_tag manage_acct_transactions_administrator_path, :method => 'get', :id => "search-form" do %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search Transactions'  %>
+      <%= select_tag("search_criteria", options_for_select([['by transaction id', '1'],['by account id', '2']], selected: '1')) %>
+      <%= submit_tag "Search", :name => nil, :class => 'btn-search' %>
+  <% end %>
+  <br />
+    <%= paginate (@acct_transactions) %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="hide-small">Date</th>
+          <th>Transaction ID</th>
+          <th class="hide-medium">Type</th>
+          <th class="hide-medium">Account ID</th>
+          <th class="hide-large">Description</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @acct_transactions.each do |trans| %>
+          <tr>
+            <td class="hide-small"><%= trans.date.strftime("%B %d, %Y") %></td>
+            <td><%= trans.id %></td>
+            <td class="hide-medium"><%= TransactionType.find(trans.transaction_type_id).name %></td>
+            <td class="hide-medium"><%= trans.account_id %></td>
+            <td class="hide-large"><%= trans.description %></td>
+            <td><%= number_to_currency(trans.amount) %></td>
+            <td><%= link_to 'Show', acct_transaction_path(trans), :class => "btn btn-default" %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <%= paginate (@acct_transactions) %>
+    <br />
+    <div id='links-block'>
+      <%= link_to 'Back', :back, :class => "btn btn-primary formButton"  %>
+      <%= link_to 'Return to Dashboard', manage_acct_transactions_administrator_path, :class => "btn btn-info formButton"  %>
+    </div>
+<% end %>

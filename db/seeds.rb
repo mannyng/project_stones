@@ -31,7 +31,7 @@ TransactionType.create(id: 5, name: 'POS')
 TransactionType.create(id: 6, name: 'Transfer')
 TransactionType.create(id: 7, name: 'Withdrawal')
 TransactionType.create(id: 8, name: 'Interest')
-TransactionType.create(id: 8, name: 'Wire')
+TransactionType.create(id: 9, name: 'Wire')
 TransactionType.create(id: 99, name: 'Miscellaneous')
 #Generate account types
 AcctType.create(id: 1, name: 'savings', interest_rate: 0.99)

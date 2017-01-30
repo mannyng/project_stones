@@ -21,6 +21,15 @@
   	<span role=button><%= link_to "Sign in", new_user_session_path, :class => "btn btn-success btn-lg" %></span>
   	<!--<span role=button><%#= link_to "Create an Account", new_user_registration_path, :class => "btn btn-primary btn-lg" %></span>-->
   	<% end %>
+  <h4>Gold high: <%= @gold[:high] %> </h4>
+  <h4>Gold asking: <%= @gold[:ask] %> </h4>
+  <h4>Platinum high: <%= @platinum[:high] %> </h4>
+  <h4>Platinum asking: <%= @platinum[:ask] %> </h4>
+  <h4>Palladium high: <%= @palladium[:high] %> </h4>
+  <h4>Palladium asking: <%= @palladium[:ask] %> </h4>
+  <h4>Silver high: <%= @silver[:high] %> </h4>
+  <h4>Silver asking: <%= @silver[:ask] %> </h4>
+
   </p>
   <br />
   <p style="font-size: 10pt; color: #000; background: #EEE">

@@ -63,6 +63,10 @@ group :development do
         #gem 'capistrano-rvm', github: "capistrano/rvm"
         #gem 'capistrano-passenger' 
 end
+
+# Kitco Charts about Gold and other precious metals
+gem 'kitco'
+
 # Twitter bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'

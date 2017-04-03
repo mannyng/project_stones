@@ -44,7 +44,7 @@
 </nav>
 
 <div class="tickercontainer">
-	<div class="row ticker">
+	<div class="row" id="ticker">
    <% unless @gold.nil? %>
    <div class="col-md-2">Gold high: <%=  @gold[:high] %> </div>
   <div class="col-md-2">Gold ask: <%= @gold[:ask] %> </div>

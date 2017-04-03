@@ -44,7 +44,7 @@
 </nav>
 
 <div class="tickercontainer">
-	<div class="row" id="ticker">
+	<div class="row" id="ticker" style="color: white; width: 100%; margin: 5px; background-color: green; @media screen and (max-width: 480px){font-size:10pt;};" >
    <% unless @gold.nil? %>
    <div class="col-md-2">Gold high: <%=  @gold[:high] %> </div>
   <div class="col-md-2">Gold ask: <%= @gold[:ask] %> </div>

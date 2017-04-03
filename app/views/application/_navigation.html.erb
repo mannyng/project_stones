@@ -42,3 +42,27 @@
 	    </div>
 	  </div>
 </nav>
+
+<div class="tickercontainer">
+	<div class="ticker row">
+   <% unless @gold.nil? %>
+   <div class="col-md-2">Gold high: <%=  @gold[:high] %> </div>
+  <div class="col-md-2">Gold ask: <%= @gold[:ask] %> </div>
+   <% end %>
+   <% unless @platinum.nil? %>
+  <div class="col-md-2">Platinum high: <%= @platinum[:high] %> </div>
+  <div class="col-md-2">Platinum ask: <%= @platinum[:ask] %> </div>
+   <% end %>
+   <%# unless @palladium.nil? %>
+   <%#= @palladium[:high] %>
+  <%#= @palladium[:ask] %> 
+    <%# end %>
+   <% unless @silver.nil? %>
+  <div class="col-md-2">Silver high: <%= @silver[:high] %> </div>
+  <div class="col-md-2">Silver ask: <%= @silver[:ask] %> </div>
+   <% end %>
+
+		<!--<span class="tickeroverlay-left">&nbsp;</span>
+		<span class="tickeroverlay-right">&nbsp;</span>-->
+         </div>
+	</div>

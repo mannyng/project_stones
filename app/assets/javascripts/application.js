@@ -9,6 +9,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require ticker-rails
+//= require Base_camp
 //= require bootstrap-sprockets
 //= require change_theme
 //= require_self

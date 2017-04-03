@@ -6,12 +6,12 @@
   <table id="indexTable" class="table table-striped">
     <thead>
       <tr>
-        <th>Account Number</th>
+        <th class="hide-small">Account Number</th>
         <th>Type</th>
         <th>Balance</th>
         <th>Transaction</th>
         <th>History</th>
-        <th>Actions</th>
+        <th class="hide-small">Actions</th>
       </tr>
     </thead>
 
@@ -19,7 +19,7 @@
         <!-- Iterate through accounts and display info and actions -->
         <% for account in @accounts do %>
         <tr>
-          <td><%= '%012d' % account.id %></td>
+          <td class="hide-small"><%= '%012d' % account.id %></td>
           <td><%= AcctType.find(account.acct_type_id).name %></td>
           <td><%= number_to_currency(account.balance)%></td>
           <!-- Action links -->
@@ -30,7 +30,7 @@
            <li><%= link_to 'Wire Transfer', new_account_acct_transactions_path(:account_id => account.id, :transaction_type_id => 9), :class => "btn btn-default" %> <%#= link_to 'Wire Transfer', new_account_recipient_details_path(:account_id => account.id, :transaction_type_id => 9), :class => "btn btn-default" %></li>
         </ul></td>     
           <td><%= link_to 'Show', account, :class => "btn btn-default" %></td>
-          <td><%= link_to 'Close This Account', account, method: :delete, data: { confirm: 'Are you sure you want to close this account?' } %></td>
+          <td class="hide-small"><%= link_to 'Close This Account', account, method: :delete, data: { confirm: 'Are you sure you want to close this account?' } %></td>
         </tr>
         <% end %>
       

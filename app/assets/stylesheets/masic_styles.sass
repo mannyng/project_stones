@@ -1,0 +1,18 @@
+$break-s: 480px
+
+.tickercontainer
+  background: rgba(65,20,21,-76)
+  color: rgba(39,93,23,-23)
+  
+  .ticker
+    color: white
+    width: 100%
+    margin: 5px
+    background-color: green
+
+  .ticker div
+    display: inline-block
+    word-wrap: break-word   
+
+    @media screen and (max-width: $break-s)
+      font-size: 10pt
